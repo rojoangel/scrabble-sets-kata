@@ -30,3 +30,6 @@ tile_count 'X' = 1
 tile_count 'Y' = 2
 tile_count 'Z' = 1
 tile_count _ = 0
+
+count_tile :: Char -> [Char] -> Int
+count_tile a xs = sum [1 | x <- xs, a == x]
