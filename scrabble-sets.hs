@@ -33,3 +33,6 @@ tile_count _ = 0
 
 count_tile :: Char -> [Char] -> Int
 count_tile a xs = sum [1 | x <- xs, a == x]
+
+left_tiles :: [Char] -> [(Char, Int)]
+left_tiles xs = [(t, tile_count t - count_tile t xs) | t <- tiles]
