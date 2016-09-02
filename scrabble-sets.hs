@@ -1,5 +1,5 @@
 import qualified Data.Tuple as Tuple
-import Data.List (groupBy)
+import Data.List (groupBy, sort)
 
 tiles :: [Char]
 tiles = '_' : ['A'..'Z']
@@ -44,4 +44,4 @@ left_tiles :: [Char] -> [(Int, Char)]
 left_tiles ts = [(left_tile t ts, t) | t <- tiles]
 
 group_left_tiles :: [(Int, Char)] -> [[(Int, Char)]]
-group_left_tiles ts = groupBy (\a b -> fst a == fst b) ts
+group_left_tiles ts = groupBy (\a b -> fst a == fst b) $ sort ts
