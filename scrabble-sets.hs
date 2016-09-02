@@ -1,4 +1,5 @@
 import qualified Data.Tuple as Tuple
+import Data.List (groupBy)
 
 tiles :: [Char]
 tiles = '_' : ['A'..'Z']
@@ -44,3 +45,6 @@ left_tiles ts = [(t, left_tile t ts) | t <- tiles]
 
 left_tiles_swapped :: [Char] -> [(Int, Char)]
 left_tiles_swapped ts = [Tuple.swap t | t <- left_tiles ts]
+
+group_left_tiles :: [(Int, Char)] -> [[(Int, Char)]]
+group_left_tiles ts = groupBy (\a b -> fst a == fst b) ts
