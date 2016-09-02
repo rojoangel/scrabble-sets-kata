@@ -39,5 +39,5 @@ left_tiles ts = [(left_tile t ts, t) | t <- tiles]
     where count_tile a xs = sum [1 | x <- xs, a == x]
           left_tile t ts  = tile_count t - count_tile t ts
 
-group_left_tiles :: [(Int, Char)] -> [[(Int, Char)]]
-group_left_tiles ts = groupBy (\a b -> fst a == fst b) $ sort ts
+group_tiles_by_count :: [(Int, Char)] -> [[(Int, Char)]]
+group_tiles_by_count ts = groupBy (\a b -> fst a == fst b) $ sort ts
