@@ -41,3 +41,6 @@ left_tiles ts = [(left_tile t ts, t) | t <- tiles]
 
 group_tiles_by_count :: [(Int, Char)] -> [[(Int, Char)]]
 group_tiles_by_count ts = groupBy (\a b -> fst a == fst b) $ sort ts
+
+group_tiles_by_count' :: [[(Int, Char)]] -> [(Int, [Char])]
+group_tiles_by_count' ts = map (foldl (\ (_, accB) (a, b) -> (a, accB ++ [b])) (0, "")) ts
