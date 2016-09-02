@@ -40,11 +40,8 @@ count_tile a xs = sum [1 | x <- xs, a == x]
 left_tile :: Char -> [Char] -> Int
 left_tile t ts = tile_count t - count_tile t ts
 
-left_tiles :: [Char] -> [(Char, Int)]
-left_tiles ts = [(t, left_tile t ts) | t <- tiles]
-
-left_tiles_swapped :: [Char] -> [(Int, Char)]
-left_tiles_swapped ts = [Tuple.swap t | t <- left_tiles ts]
+left_tiles :: [Char] -> [(Int, Char)]
+left_tiles ts = [(left_tile t ts, t) | t <- tiles]
 
 group_left_tiles :: [(Int, Char)] -> [[(Int, Char)]]
 group_left_tiles ts = groupBy (\a b -> fst a == fst b) ts
