@@ -1,4 +1,4 @@
-import qualified Data.Tuple as Tuple
+module ScrabbleSets where
 import Data.List (groupBy, sort)
 
 tiles :: [Char]
@@ -39,8 +39,11 @@ left_tiles ts = [(left_tile t ts, t) | t <- tiles]
     where count_tile a xs = sum [1 | x <- xs, a == x]
           left_tile t ts  = tile_count t - count_tile t ts
 
-group_tiles_by_count :: [(Int, Char)] -> [[(Int, Char)]]
-group_tiles_by_count ts = groupBy (\a b -> fst a == fst b) $ sort ts
+group_left_tiles_by_count :: [(Int, Char)] -> [[(Int, Char)]]
+group_left_tiles_by_count ts = groupBy (\a b -> fst a == fst b) $ sort ts
 
-group_tiles_by_count' :: [[(Int, Char)]] -> [(Int, [Char])]
-group_tiles_by_count' ts = map (foldl (\ (_, accB) (a, b) -> (a, accB ++ [b])) (0, "")) ts
+compact_groups :: [[(Int, Char)]] -> [(Int, [Char])]
+compact_groups ts = reverse $ map (foldl (\ (_, accB) (a, b) -> (a, accB ++ [b])) (0, "")) ts
+
+tiles_left_in_bag :: [Char] -> [(Int, [Char])]
+tiles_left_in_bag = compact_groups . group_left_tiles_by_count . left_tiles
