@@ -24,3 +24,12 @@ main = hspec $ do
                                                       (2,"BCFGMVY"),
                                                       (1,"HJKPWXZ_"),
                                                       (0,"Q")]
+      tiles_left_in_bag "LQTOONOEFFJZT" `shouldBe` [(11,"E"),
+                                                    (9,"AI"),
+                                                    (6,"R"),
+                                                    (5,"NO"),
+                                                    (4,"DSTU"),
+                                                    (3,"GL"),
+                                                    (2,"BCHMPVWY_"),
+                                                    (1,"KX"),
+                                                    (0,"FJQZ")]
