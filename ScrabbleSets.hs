@@ -40,13 +40,18 @@ tile_count _ = 0
 left_tiles :: [Char] -> [(Int, Char)]
 left_tiles ts = [(left_tile t ts, t) | t <- tiles]
     where count_tile a xs = sum [1 | x <- xs, a == x]
-          left_tile t ts  = tile_count t - count_tile t ts
+          left_tile t ts  = (tile_count t - count_tile t ts)
 
 group_left_tiles_by_count :: [(Int, Char)] -> [[(Int, Char)]]
 group_left_tiles_by_count ts = groupBy (\a b -> fst a == fst b) $ sort ts
+
+check_for_errors:: [[(Int, Char)]] -> [[(Int, Char)]]
+check_for_errors ts
+  | (< 0) . fst . head $ head ts = error "Invalid input. More X's have been taken from the bag than possible."
+  | otherwise                    = ts
 
 compact_groups :: [[(Int, Char)]] -> [(Int, [Char])]
 compact_groups ts = reverse $ map (foldl (\ (_, accB) (a, b) -> (a, accB ++ [b])) (0, "")) ts
 
 tiles_left_in_bag :: [Char] -> [(Int, [Char])]
-tiles_left_in_bag = compact_groups . group_left_tiles_by_count . left_tiles
+tiles_left_in_bag = compact_groups . check_for_errors . group_left_tiles_by_count . left_tiles

@@ -1,5 +1,6 @@
 module ScrabbleSets.Test where
 import ScrabbleSets (tiles_left_in_bag)
+import Control.Exception (evaluate)
 import Test.Hspec
 
 main = hspec $ do
@@ -33,3 +34,4 @@ main = hspec $ do
                                                     (2,"BCHMPVWY_"),
                                                     (1,"KX"),
                                                     (0,"FJQZ")]
+      evaluate(tiles_left_in_bag "AXHDRUIOR_XHJZUQEE") `shouldThrow` errorCall "Invalid input. More X's have been taken from the bag than possible."
