@@ -47,8 +47,12 @@ group_left_tiles_by_count ts = groupBy (\a b -> fst a == fst b) $ sort ts
 
 check_for_errors:: [[(Int, Char)]] -> [[(Int, Char)]]
 check_for_errors ts
-  | (< 0) . fst . head $ head ts = error $ "Invalid input. More " ++ [(snd . head $ head ts)] ++ "'s have been taken from the bag than possible."
-  | otherwise                    = ts
+  | (< 0) headOfHeadCount = error $ "Invalid input. More " ++
+                                    [headOfHeadLetter] ++
+                                    "'s have been taken from the bag than possible."
+  | otherwise             = ts
+  where headOfHeadCount  = fst . head $ head ts
+        headOfHeadLetter = snd . head $ head ts
 
 compact_groups :: [[(Int, Char)]] -> [(Int, [Char])]
 compact_groups ts = reverse $ map (foldl (\ (_, accB) (a, b) -> (a, accB ++ [b])) (0, "")) ts
