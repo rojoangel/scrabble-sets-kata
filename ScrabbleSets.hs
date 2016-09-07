@@ -1,4 +1,7 @@
-module ScrabbleSets where
+module ScrabbleSets
+(tiles_left_in_bag
+) where
+
 import Data.List (groupBy, sort)
 
 tiles :: [Char]
