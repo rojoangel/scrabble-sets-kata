@@ -37,3 +37,8 @@ canTileBePlayed :: Char -> Map.Map Char Int -> Bool
 canTileBePlayed t ts
   | Map.lookup t ts == Just 0 = False
   | otherwise                 = True
+
+playTile :: Char -> Map.Map Char Int -> Map.Map Char Int
+playTile t ts
+  | canTileBePlayed t ts = Map.fromListWith (-) $ (t, 1) : Map.toList ts
+  | otherwise            = error $ "Invalid input. More " ++ [t] ++ "'s have been taken from the bag than possible."
