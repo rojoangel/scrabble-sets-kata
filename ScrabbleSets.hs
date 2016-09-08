@@ -42,3 +42,7 @@ playTile :: Char -> Map.Map Char Int -> Map.Map Char Int
 playTile t ts
   | canTileBePlayed t ts = Map.fromListWith (-) $ (t, 1) : Map.toList ts
   | otherwise            = error $ "Invalid input. More " ++ [t] ++ "'s have been taken from the bag than possible."
+
+playTiles :: [Char] -> Map.Map Char Int -> Map.Map Char Int
+playTiles [] m     = m
+playTiles (t:ts) m = playTiles ts $ playTile t m
