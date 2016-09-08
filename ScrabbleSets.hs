@@ -1,7 +1,9 @@
 module ScrabbleSets
 where
 
+import qualified Data.List as List
 import qualified Data.Map as Map
+import qualified Data.Tuple as Tuple
 
 tiles :: Map.Map Char Int
 tiles = Map.fromList [
@@ -46,3 +48,6 @@ playTile t ts
 playTiles :: [Char] -> Map.Map Char Int -> Map.Map Char Int
 playTiles [] m     = m
 playTiles (t:ts) m = playTiles ts $ playTile t m
+
+formatTiles :: Map.Map Char Int -> [(Int, [Char])]
+formatTiles ts = reverse . Map.toList . Map.fromListWith (flip (++)) . List.map (\(x,y) -> (x, [y])) . List.map Tuple.swap $ Map.toList ts
