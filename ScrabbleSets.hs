@@ -1,5 +1,7 @@
 module ScrabbleSets
-where
+( tiles
+, leftTiles
+) where
 
 import qualified Data.List as List
 import qualified Data.Map as Map
