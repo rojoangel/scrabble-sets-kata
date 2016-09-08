@@ -33,7 +33,7 @@ tiles = Map.fromList [
   ('Y', 2),
   ('Z', 1)]
 
-can_tile_be_played :: Char -> Map.Map Char Int -> Bool
-can_tile_be_played t ts
+canTileBePlayed :: Char -> Map.Map Char Int -> Bool
+canTileBePlayed t ts
   | Map.lookup t ts == Just 0 = False
   | otherwise                 = True
