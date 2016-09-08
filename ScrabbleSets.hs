@@ -51,3 +51,6 @@ playTiles (t:ts) m = playTiles ts $ playTile t m
 
 formatTiles :: Map.Map Char Int -> [(Int, [Char])]
 formatTiles ts = reverse . Map.toList . Map.fromListWith (flip (++)) . List.map (\(x,y) -> (x, [y])) . List.map Tuple.swap $ Map.toList ts
+
+leftTiles :: [Char] -> [(Int, [Char])]
+leftTiles ts = formatTiles $ playTiles ts tiles
